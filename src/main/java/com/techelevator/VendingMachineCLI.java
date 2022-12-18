@@ -2,6 +2,7 @@ package com.techelevator;
 
 import com.techelevator.view.Item;
 import com.techelevator.view.Menu;
+import com.techelevator.view.SalesReport;
 import com.techelevator.view.VendingMachine;
 
 import java.io.File;
@@ -18,7 +19,8 @@ public class VendingMachineCLI  {
 	private static final String MAIN_MENU_OPTION_DISPLAY_ITEMS = "Display Vending Machine Items";
 	private static final String MAIN_MENU_OPTION_PURCHASE = "Purchase";
 	private static final String MAIN_MENU_OPTION_EXIT = "EXIT";
-	private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT};
+	private static final String MAIN_MENU_OPTION_HIDDEN_SALES_REPORT = "(Hidden) Sales Report";
+	private static final String[] MAIN_MENU_OPTIONS = {MAIN_MENU_OPTION_DISPLAY_ITEMS, MAIN_MENU_OPTION_PURCHASE, MAIN_MENU_OPTION_EXIT, MAIN_MENU_OPTION_HIDDEN_SALES_REPORT};
 	private static final String SECOND_MENU_1 = "Feed Money";
 	private static final String SECOND_MENU_2 = "Select Product";
 	private static final String SECOND_MENU_3 = "Finish Transaction";
@@ -165,6 +167,9 @@ public class VendingMachineCLI  {
 				System.exit(0);
 
 
+			} else if (choice.equals(MAIN_MENU_OPTION_HIDDEN_SALES_REPORT)) {
+				// sales report
+				SalesReport.report(inventoryMap);
 			}
 		}
 	}

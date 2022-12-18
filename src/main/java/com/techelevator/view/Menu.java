@@ -59,7 +59,11 @@ public class Menu {
 		out.println();
 		for (int i = 0; i < options.length; i++) {
 			int optionNum = i + 1;
-			out.println("         "+optionNum + ") " + options[i]);
+			//out.println("         "+optionNum + ") " + options[i]);
+			//By Kevin - 12/18/2022
+			if (!options[i].toString().toUpperCase().contains("HIDDEN")) {
+				out.println(optionNum + ") " + options[i]);
+			}
 		}
 		out.println("\n        ----------------------------------------------------");
 		DecimalFormat myFormat = new DecimalFormat("#.00");
