@@ -2,6 +2,7 @@ package com.techelevator.view;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.text.DecimalFormat;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,11 +26,12 @@ public class MenuTest {
 	public void displays_a_list_of_menu_options_and_prompts_user_to_make_a_choice() {
 		Object[] options = new Object[] { Integer.valueOf(3), "Blind", "Mice" };
 		Menu menu = getMenuForTesting();
-
+		DecimalFormat myFormat = new DecimalFormat("#.00");
+		double balance = 0;
 		menu.getChoiceFromOptions(options,0);
 
-		String expected = System.lineSeparator() +"        ----------------------------------------------------" +System.lineSeparator() + "                    Vending Machine Vendo-Matic 800"+System.lineSeparator() + "1) " + options[0].toString() + System.lineSeparator() + "2) " + options[1].toString() + System.lineSeparator() + "3) "
-				+ options[2].toString() + System.lineSeparator() + System.lineSeparator() + "Please choose an option --> ";
+		String expected ="          ----------------------------------------------------" +System.lineSeparator() +"                    Vending Machine Vendo-Matic 800"+System.lineSeparator()+"                              MERIT AMERICA"+System.lineSeparator() +"\n        ----------------------------------------------------"+System.lineSeparator() + "1) " + options[0].toString() + System.lineSeparator() + "2) " + options[1].toString() + System.lineSeparator() + "3) "
+				+ options[2].toString() + System.lineSeparator() +"\n        ----------------------------------------------------" + System.lineSeparator()+"\nCurrent Money Provided: $"+ myFormat.format(balance).toString()+System.lineSeparator() +"" +System.lineSeparator() + "Please choose an option --> ";
 		Assert.assertEquals(expected, output.toString());
 	}
 

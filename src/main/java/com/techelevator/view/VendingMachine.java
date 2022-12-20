@@ -18,7 +18,9 @@ import java.util.Set;
 import java.util.regex.Pattern;
 public class VendingMachine {
 
-
+    public static final String RED = "\033[1;31m";
+    public static final String RESET = "\u001B[0m";
+    public static final String YELLOW = "\033[1;33m"; // YELLOW
     public double balance = 0;
     List<String> list = new ArrayList<String>();
 
@@ -72,7 +74,7 @@ public class VendingMachine {
         if(values.contains(addMoney)) {
             balance += addMoney;
         } else {
-            System.out.println("Invalid Amount Enter, Remember Machine is Only accepting << $1, $2, $5, $10, $20 and $50\n ");
+            System.out.println("Invalid Amount Enter, Remember Machine only accepts: "+ RED +" 1's, $2's, $5's, $10's, $20's, $50's"+RESET+"\n ");
         }
     }
     public double getBalance() {
@@ -114,4 +116,5 @@ public class VendingMachine {
     public List<String> getList(){
         return this.list;
     }
-}
+    }
+

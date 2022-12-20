@@ -25,7 +25,9 @@ public class VendingMachineCLI  {
 	private static final String SECOND_MENU_2 = "Select Product";
 	private static final String SECOND_MENU_3 = "Finish Transaction";
 	private static final String[] SECOND_MENU_OPTIONS = {SECOND_MENU_1, SECOND_MENU_2, SECOND_MENU_3};
-
+	public static final String RED = "\033[1;31m";
+	public static final String RESET = "\u001B[0m";
+	public static final String YELLOW = "\033[1;93m"; // YELLOW
 	List<Item> purchasedObjects = new ArrayList<Item>(); //INITIALISATION LIST TO CONTAIN PRODUCTS
 
 	private Menu menu;
@@ -34,6 +36,12 @@ public class VendingMachineCLI  {
 		this.menu = menu;
 	}
 
+	public void sound() {
+		for (Item product : purchasedObjects) {
+			String sound = product.getSound();
+			System.out.println("|  " + sound + "   |");
+		}
+	}
 	public void run() throws IOException {
 	VendingMachine vendingMachine = new VendingMachine();
 		File file = vendingMachine.getInputFile();
@@ -70,7 +78,7 @@ public class VendingMachineCLI  {
 						while (true) {
 							try {
 								System.out.println("             -------------------------------------------------------------\n");
-								System.out.println("         Enter amount you would like to feed or Enter(R) when you are done feeding the machine  \n");
+								System.out.println("         Enter amount you would like to feed or ("+RED+"R"+RESET+")eturn when you are done feeding the machine  \n");
 								System.out.println("             -------------------------------------------------------------\n");
 								Scanner in = new Scanner(System.in);
 								String input = in.nextLine();
@@ -82,17 +90,17 @@ public class VendingMachineCLI  {
 									vendingMachine.feedMoney(amountEntered);
 									vendingMachine.log("FEED MONEY: ",amountEntered, vendingMachine.balance); // log file feed money
 
-									System.out.println("Current balance $" + vendingMachine.getBalance());
+									System.out.println(RED + "Current balance $ :" + RESET + vendingMachine.getBalance());
 								}
 							} catch (NumberFormatException e) {
-								System.out.println("Machine only accepts: $1's, $2's, $5's, & $10's keke"); // : needs escaped!
+								System.out.println("Machine only accepts: "+ RED +" 1's, $2's, $5's, $10's, $20's, $50's"+RESET); // : needs escaped!
 							}
 						}
 
 					} else if (choice2.equals(SECOND_MENU_2)) {
 						while (true) {
 
-							System.out.println("\n Please enter the item you would like to purchase or (R)eturn to previous menu --> \n");
+							System.out.println("\n Please enter the item you would like to purchase or ("+RED+"R"+RESET+")eturn to previous menu --> \n");
 
 							while (true) {
 								String[] productArray = new String[inventoryMap.size()];
@@ -110,14 +118,13 @@ public class VendingMachineCLI  {
 
 							Scanner in = new Scanner(System.in);
 							String input = in.nextLine();
-							String input_Upper_case = input.toUpperCase();
 
 							try {
 
 								if (input.equalsIgnoreCase("R")) {
 									break;
 
-								} else if (inventoryMap.containsKey(input_Upper_case)) {
+								} else if (inventoryMap.containsKey(input)) {
 									if (inventoryMap.get(input).isAvailableToPurchase() && vendingMachine.balance >= inventoryMap.get(input).getPrice()) {
 										inventoryMap.get(input).purchaseItem();
 										purchasedObjects.add(inventoryMap.get(input));
@@ -125,49 +132,45 @@ public class VendingMachineCLI  {
 										vendingMachine.log(inventoryMap.get(input).getName(),(vendingMachine.balance + inventoryMap.get(input).getPrice()), vendingMachine.balance);
 
 										System.out.println("         " + inventoryMap.get(input).getName() + "  Purchased at :  $" + inventoryMap.get(input).getPrice());
-										System.out.println("                     Actual balance :" + vendingMachine.balance);
+										System.out.println("                     "+RED+"Actual balance : "+RESET+"" + vendingMachine.balance);
 										System.out.println("        ---------------------------------------------------------------------");
+										sound();
 
 									} else if (!inventoryMap.get(input).isAvailableToPurchase()) {
 										System.out.println("                                     SOLD OUT!");
 										break;
 									} else {
 										vendingMachine.log("INSUFFICIENT FUNDS: ", vendingMachine.balance, inventoryMap.get(input).getPrice());
-										System.out.println("Insufficient Funds, Please make a deposit    ");
+										System.out.println(RED+"Insufficient Funds, Please make a deposit "+RESET);
 										break;
 									}
 
 								} else {
-									System.out.println("      << INVALID OPTION PLEASE TRY AGAIN  >>");
+									System.out.println("      "+RED+"<< INVALID OPTION PLEASE TRY AGAIN  >>"+RESET);
 									break;
 								}
 							} catch (NullPointerException e) {
 								System.out.println("        ---------------------------------------------------------------------");
-								System.out.print("\n                 PLEASE ENTER A VALIDE ITEM CODE , TRY AGAIN\n");
+								System.out.print("\n                 PLEASE ENTER A "+RED+" VALIDE "+RESET+" ITEM CODE , TRY AGAIN\n");
 								System.out.println("        ---------------------------------------------------------------------");
-
 
 							}
 						}
 					} else if (choice2.equals(SECOND_MENU_3)) {
-						vendingMachine.log("GIVE CHANGE: ", vendingMachine.balance, 0);// log return change action
+						vendingMachine.log("GIVE CHANGE: ", vendingMachine.balance, 0.00);// log return change action
 						vendingMachine.returnChange();
 						vendingMachine.logFile();
  				       	vendingMachine.balance = 0;
-						System.out.println("Final balance: $" + vendingMachine.balance);
+						System.out.println(RED+"Final balance: $"+RESET + vendingMachine.balance);
 						System.out.println("");
-
-						for (Item product : purchasedObjects) {
-							String sound = product.getSound();
-							System.out.println("|  "+sound+"   |");
-						}
+						sound();
 						break;
 					}
 				}
 			} else if (choice.equals(MAIN_MENU_OPTION_EXIT)) {
 				// do
 				System.out.println();
-				System.out.println("                 ........It's been a pleasure to serve you ......................");
+				System.out.println("                 ........"+YELLOW+"It's been a pleasure to serve you"+RESET+" ......................");
 				System.exit(0);
 
 

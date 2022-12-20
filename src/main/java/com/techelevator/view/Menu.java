@@ -7,6 +7,9 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class Menu {
+	public static final String RED = "\033[1;31m";
+	public static final String RESET = "\u001B[0m";
+	public static final String YELLOW = "\033[1;33m"; // YELLOW
 
 	private PrintWriter out;
 	private Scanner in;
@@ -52,10 +55,10 @@ public class Menu {
 	}
 
 	private void displayMenuOptions(Object[] options, double balance) {
-		System.out.println("\n        ----------------------------------------------------");
-		System.out.println("                    Vending Machine Vendo-Matic 800\n");
+		System.out.println("          ----------------------------------------------------");
+		System.out.println("                    Vending Machine Vendo-Matic 800");
 		System.out.println("                              MERIT AMERICA");
-		System.out.println("\n        ----------------------------------------------------");
+		System.out.println("          ----------------------------------------------------");
 		out.println();
 		for (int i = 0; i < options.length; i++) {
 			int optionNum = i + 1;

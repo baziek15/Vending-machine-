@@ -31,7 +31,6 @@ public class SalesReport {
             System.err.println(e.getMessage());
         }
     }
-
     public static String dollarFormat(double dollar) {
         return " $"+String.format("%.2f", dollar);
     }
