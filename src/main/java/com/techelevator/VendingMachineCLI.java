@@ -132,6 +132,7 @@ public class VendingMachineCLI  {
 										System.out.println("                                     SOLD OUT!");
 										break;
 									} else {
+										vendingMachine.log("INSUFFICIENT FUNDS: ", vendingMachine.balance, inventoryMap.get(input).getPrice());
 										System.out.println("Insufficient Funds, Please make a deposit    ");
 										break;
 									}
@@ -149,8 +150,8 @@ public class VendingMachineCLI  {
 							}
 						}
 					} else if (choice2.equals(SECOND_MENU_3)) {
+						vendingMachine.log("GIVE CHANGE: ", vendingMachine.balance, 0);// log return change action
 						vendingMachine.returnChange();
-						vendingMachine.log("GIVE CHANGE: ", vendingMachine.balance, 0.00);// log return change action
 						vendingMachine.logFile();
  				       	vendingMachine.balance = 0;
 						System.out.println("Final balance: $" + vendingMachine.balance);
