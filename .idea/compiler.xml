@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="m1-java-capstone-vending-machine" />
+        <module name="module-1-capstone" />
       </profile>
     </annotationProcessing>
   </component>

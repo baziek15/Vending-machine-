@@ -80,6 +80,8 @@ public class VendingMachineCLI  {
 								} else {
 									double amountEntered = Double.parseDouble(input);
 									vendingMachine.feedMoney(amountEntered);
+									vendingMachine.log("FEED MONEY: ",amountEntered, vendingMachine.balance); // log file feed money
+
 									System.out.println("Current balance $" + vendingMachine.getBalance());
 								}
 							} catch (NumberFormatException e) {
@@ -148,6 +150,7 @@ public class VendingMachineCLI  {
 						}
 					} else if (choice2.equals(SECOND_MENU_3)) {
 						vendingMachine.returnChange();
+						vendingMachine.log("GIVE CHANGE: ", vendingMachine.balance, 0.00);// log return change action
 						vendingMachine.logFile();
  				       	vendingMachine.balance = 0;
 						System.out.println("Final balance: $" + vendingMachine.balance);
@@ -155,7 +158,7 @@ public class VendingMachineCLI  {
 
 						for (Item product : purchasedObjects) {
 							String sound = product.getSound();
-							System.out.println(sound);
+							System.out.println("|  "+sound+"   |");
 						}
 						break;
 					}

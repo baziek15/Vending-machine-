@@ -6,6 +6,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -91,7 +92,7 @@ public class VendingMachine {
     }
 
     public void logFile() throws IOException  {
-        File outputFile = new File("/Users/User/Desktop/keke/exo/original/module-1-capstone/log/log.txt");
+        File outputFile = new File("log/log.txt");
         List<String> list = getList();
         try(FileWriter logWriter = new FileWriter(outputFile, true)){
             for(String str : list) {
@@ -103,8 +104,10 @@ public class VendingMachine {
     public List<String> log(String name, double beginningAmount, double endAmount) {
 
         LocalDateTime time = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+        String formattedDate = time.format(myFormatObj);
         DecimalFormat myFormat = new DecimalFormat("#.00");
-        String str = time + " " + name + " " + beginningAmount + " " + myFormat.format(endAmount);
+        String str = formattedDate + "    " + name + "       " + beginningAmount + "         " + myFormat.format(endAmount);
         list.add(str);
         return list;
     }
