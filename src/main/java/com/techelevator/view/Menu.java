@@ -56,8 +56,8 @@ public class Menu {
 
 	private void displayMenuOptions(Object[] options, double balance) {
 		System.out.println("          ----------------------------------------------------");
-		System.out.println("                    Vending Machine Vendo-Matic 800");
-		System.out.println("                              MERIT AMERICA");
+		System.out.println("                    "+RED+"Vending Machine Vendo-Matic 800"+RESET);
+		System.out.println("                            "+RED+"  MERIT AMERICA"+RESET);
 		System.out.println("          ----------------------------------------------------");
 		out.println();
 		for (int i = 0; i < options.length; i++) {
@@ -65,20 +65,20 @@ public class Menu {
 			//out.println("         "+optionNum + ") " + options[i]);
 			//By Kevin - 12/18/2022
 			if (!options[i].toString().toUpperCase().contains("HIDDEN")) {
-				out.println(optionNum + ") " + options[i]);
+				out.println( RED+ optionNum + RESET+ ") " + options[i]);
 			}
 		}
 		out.println("\n        ----------------------------------------------------");
-		DecimalFormat myFormat = new DecimalFormat("#.00");
+		DecimalFormat myFormat = new DecimalFormat("#0.00");
 
-		out.println("\nCurrent Money Provided: $" + myFormat.format(balance));
-		out.print("\nPlease choose an option --> ");
+		out.println("\nCurrent Money Provided: $" + RED +myFormat.format(balance)+ RESET);
+		out.print("\nPlease choose an option "+RED+"--> "+RESET);
 
 		out.flush();
 	}
 	public void displayMenuOptionsForItems(Object[] options) {
 		out.println();
-		String file = String.format("%1$-7s %2$-13s %3$7s %4$10s", "Slot", "Name", "Price", "Quantity\n");
+		String file = String.format(RED+"%1$-7s %2$-13s %3$7s %4$10s", "Slot", "Name", "Price", "Quantity\n"+RESET);
 		out.println(file);
 		for(int i = 0; i < options.length; i++) {
 			out.println(options[i]);

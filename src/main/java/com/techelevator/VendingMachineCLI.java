@@ -90,7 +90,7 @@ public class VendingMachineCLI  {
 									vendingMachine.feedMoney(amountEntered);
 									vendingMachine.log("FEED MONEY: ",amountEntered, vendingMachine.balance); // log file feed money
 
-									System.out.println(RED + "Current balance $ :" + RESET + vendingMachine.getBalance());
+									System.out.println( "Current balance $ :"+ RED + vendingMachine.getBalance()+ RESET);
 								}
 							} catch (NumberFormatException e) {
 								System.out.println("Machine only accepts: "+ RED +" 1's, $2's, $5's, $10's, $20's, $50's"+RESET); // : needs escaped!
@@ -185,8 +185,8 @@ public class VendingMachineCLI  {
 		Menu menu = new Menu(System.in, System.out);
 		VendingMachineCLI cli = new VendingMachineCLI(menu);
 		System.out.println("\n        ----------------------------------------------------");
-		System.out.println("    Welcome to the  Module 1 Capstone - Vending Machine Software\n");
-		System.out.println("                 Kevin BAZIE     &    Yongkon Hahn ");
+		System.out.println("    "+YELLOW +"Welcome to the  Module 1 Capstone - Vending Machine Software"+RESET+" \n");
+		System.out.println("                         "+YELLOW +"  Kevin BAZIE  " +RESET);
 		System.out.println("\n        ----------------------------------------------------");
 		try {
 			cli.run();
